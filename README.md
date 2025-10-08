@@ -111,7 +111,7 @@ Feel free to use, modify, and share!
 
 ### 📸 Preview GIF or Screenshot
 
-<img width="1920" height="1080" alt="img" src="https://github.com/user-attachments/assets/41e4ea14-cf6e-488d-82f4-97ec9f75a0d5" />
+<img width="1894" height="1017" alt="img1" src="https://github.com/user-attachments/assets/ea640930-0faf-4899-89cf-3ce980aee2a3" />
 
 
 ---
