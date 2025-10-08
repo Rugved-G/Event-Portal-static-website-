@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Event Portal — BookMyShow-style</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Opening Animation -->
+<div id="openingAnimation" class="opening-screen">
+  <h1 class="opening-text">EventPortal.com</h1>
+</div>
+
+  <header class="topbar">
+  <div class="brand">Event Portal</div>
+  <div class="header-actions">
+    <button id="toggleSidebar" class="btn">☰ Filters</button>
+    <button id="btnAdd" class="btn primary">+ Add Event</button>
+  </div>
+</header>
+
+
+  <div class="layout">
+    <!-- Left Navigation -->
+    <aside class="sidebar">
+      <h3>Filters</h3>
+      <div class="filter-group">
+        <h4>Type</h4>
+        <label><input type="checkbox" class="filter-type" value="Music"> Music</label>
+        <label><input type="checkbox" class="filter-type" value="Sports"> Sports</label>
+        <label><input type="checkbox" class="filter-type" value="Theatre"> Theatre</label>
+        <label><input type="checkbox" class="filter-type" value="Comedy"> Comedy</label>
+      </div>
+      <div class="filter-group">
+        <h4>Age Restriction</h4>
+        <label><input type="radio" name="age" value="All" checked> All Ages</label>
+        <label><input type="radio" name="age" value="18+"> 18+</label>
+        <label><input type="radio" name="age" value="21+"> 21+</label>
+      </div>
+      <div class="filter-group">
+        <h4>Location</h4>
+        <select id="filterLocation">
+          <option value="">All</option>
+          <option>Mumbai</option>
+          <option>Delhi</option>
+          <option>Bangalore</option>
+          <option>Pune</option>
+        </select>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <section id="eventsGrid" class="grid"></section>
+    </main>
+  </div>
+
+  <!-- Modal (Add/Edit Event) -->
+  <div id="modal" class="modal hidden">
+    <form id="eventForm" class="modal-card">
+      <h3 id="modalTitle">Add Event</h3>
+      <label>Title <input name="title" required /></label>
+      <label>Type
+        <select name="type" required>
+          <option value="Music">Music</option>
+          <option value="Sports">Sports</option>
+          <option value="Theatre">Theatre</option>
+          <option value="Comedy">Comedy</option>
+        </select>
+      </label>
+      <label>Venue <input name="venue" required /></label>
+      <label>Location
+        <select name="location" required>
+          <option>Mumbai</option><option>Delhi</option><option>Bangalore</option><option>Pune</option>
+        </select>
+      </label>
+      <label>Date & Time <input name="dateTime" type="datetime-local" required /></label>
+      <label>Age Restriction
+        <select name="age" required>
+          <option>All</option><option>18+</option><option>21+</option>
+        </select>
+      </label>
+      <label>Seats <input name="seats" type="number" min="0" /></label>
+      <label>Image URL <input name="imageUrl" placeholder="https://..." /></label>
+      <label>Description <textarea name="description" rows="3"></textarea></label>
+      <div class="form-actions">
+        <button type="submit" class="btn primary">Save</button>
+        <button type="button" id="btnCancel" class="btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <template id="cardTpl">
+    <article class="card">
+      <img class="thumb" />
+      <div class="card-body">
+        <h4 class="title"></h4>
+        <div class="meta"></div>
+        <p class="desc"></p>
+        <div class="card-actions"></div>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
