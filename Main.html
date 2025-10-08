@@ -32,6 +32,8 @@
         <label><input type="checkbox" class="filter-type" value="Sports"> Sports</label>
         <label><input type="checkbox" class="filter-type" value="Theatre"> Theatre</label>
         <label><input type="checkbox" class="filter-type" value="Comedy"> Comedy</label>
+        <label><input type="checkbox" class="filter-type" value="Dance"> Dance</label>
+        <label><input type="checkbox" class="filter-type" value="Education"> Educational</label>
       </div>
       <div class="filter-group">
         <h4>Age Restriction</h4>
@@ -44,6 +46,7 @@
         <select id="filterLocation">
           <option value="">All</option>
           <option>Mumbai</option>
+          <option>Hyderabad</option>
           <option>Delhi</option>
           <option>Bangalore</option>
           <option>Pune</option>
@@ -68,12 +71,14 @@
           <option value="Sports">Sports</option>
           <option value="Theatre">Theatre</option>
           <option value="Comedy">Comedy</option>
+          <option value="Dance">Dance</option>
+          <option value="Education">Educational</option>
         </select>
       </label>
       <label>Venue <input name="venue" required /></label>
       <label>Location
         <select name="location" required>
-          <option>Mumbai</option><option>Delhi</option><option>Bangalore</option><option>Pune</option>
+          <option>Mumbai</option><option>Hyderabad</option><option>Delhi</option><option>Bangalore</option><option>Pune</option>
         </select>
       </label>
       <label>Date & Time <input name="dateTime" type="datetime-local" required /></label>
@@ -107,3 +112,4 @@
   <script src="app.js"></script>
 </body>
 </html>
+
