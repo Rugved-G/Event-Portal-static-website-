@@ -23,6 +23,9 @@ EventPortal.com is a responsive and user-friendly web portal built using HTML, C
 
 - 📱 **Responsive Design:**  
   Works perfectly on both desktop and mobile devices.
+  
+- 📱 **Dark Theme:**  
+  Toggles between Dark and White Themes for UI Performance
 
 ---
 
