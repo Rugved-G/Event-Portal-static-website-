@@ -13,13 +13,18 @@
   <h1 class="opening-text">EventPortal.com</h1>
 </div>
 
-  <header class="topbar">
+<header class="topbar fixed-header">
   <div class="brand">Event Portal</div>
   <div class="header-actions">
+    <label class="switch">
+      <input type="checkbox" id="darkModeToggle">
+      <span class="slider-circle"></span>
+    </label>
     <button id="toggleSidebar" class="btn">☰ Filters</button>
     <button id="btnAdd" class="btn primary">+ Add Event</button>
   </div>
 </header>
+
 
 
   <div class="layout">
@@ -45,12 +50,18 @@
         <h4>Location</h4>
         <select id="filterLocation">
           <option value="">All</option>
-          <option>Mumbai</option>
-          <option>Hyderabad</option>
-          <option>Delhi</option>
           <option>Bangalore</option>
+          <option>Hyderabad</option>
           <option>Pune</option>
+          <option>Mumbai</option>
+          <option>Delhi</option>
         </select>
+        <div class="filter-group">
+  <h4>Date</h4>
+  <label>From <input type="date" id="filterStartDate"></label>
+  <label>To <input type="date" id="filterEndDate"></label>
+</div>
+
       </div>
     </aside>
 
@@ -78,7 +89,11 @@
       <label>Venue <input name="venue" required /></label>
       <label>Location
         <select name="location" required>
-          <option>Mumbai</option><option>Hyderabad</option><option>Delhi</option><option>Bangalore</option><option>Pune</option>
+          <option>Mumbai</option>
+          <option>Hyderabad</option>
+          <option>Delhi</option>
+          <option>Bangalore</option>
+          <option>Pune</option>
         </select>
       </label>
       <label>Date & Time <input name="dateTime" type="datetime-local" required /></label>
@@ -112,4 +127,3 @@
   <script src="app.js"></script>
 </body>
 </html>
-
