@@ -8,6 +8,9 @@ const tpl = document.getElementById('cardTpl');
 const filterTypes = document.querySelectorAll('.filter-type');
 const ageRadios = document.getElementsByName('age');
 const locSelect = document.getElementById('filterLocation');
+const startDateInput = document.getElementById('filterStartDate');
+const endDateInput = document.getElementById('filterEndDate');
+const darkModeToggle = document.getElementById('darkModeToggle');
 let editId = null;
 
 // --- Local Storage Helpers ---
@@ -49,16 +52,24 @@ function seed() {
 
 // --- Render Events ---
 function render() {
+  // load & base filters
   const data = load();
   const activeTypes = [...filterTypes].filter(x => x.checked).map(x => x.value);
-  const age = [...ageRadios].find(x => x.checked)?.value;
-  const loc = locSelect.value;
+  const age = [...ageRadios].find(x => x.checked)?.value || 'All';
+  const loc = locSelect?.value || '';
+
+  // date filters (if present)
+  const startDate = startDateInput?.value ? new Date(startDateInput.value) : null;
+  const endDate = endDateInput?.value ? new Date(endDateInput.value) : null;
 
   const filtered = data.filter(e => {
+    const eventDate = new Date(e.dateTime);
     const typeOK = activeTypes.length ? activeTypes.includes(e.type) : true;
     const ageOK = (age === 'All' || e.age === age);
     const locOK = loc ? e.location === loc : true;
-    return typeOK && ageOK && locOK;
+    const startOK = !startDate || eventDate >= startDate;
+    const endOK = !endDate || eventDate <= endDate;
+    return typeOK && ageOK && locOK && startOK && endOK;
   });
 
   eventsGrid.innerHTML = '';
@@ -78,7 +89,6 @@ function render() {
     regBtn.target = '_blank';
     actions.appendChild(regBtn);
 
-    // Edit/Delete available to everyone now
     const editBtn = document.createElement('button');
     editBtn.className = 'btn';
     editBtn.textContent = 'Edit';
@@ -97,7 +107,8 @@ function render() {
 
 // --- Helpers ---
 function googleFormLink(e) {
-  return 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?usp=pp_url&entry.123=' + encodeURIComponent(e.title);
+  return 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?usp=pp_url&entry.123='
+    + encodeURIComponent(e.title);
 }
 
 function openModal() { modal.classList.remove('hidden'); }
@@ -143,17 +154,33 @@ function deleteEvent(id) {
 
 document.getElementById('btnCancel').addEventListener('click', closeModal);
 
-// --- Filters ---
-[...filterTypes, ...ageRadios, locSelect].forEach(el =>
-  el.addEventListener('change', render)
-);
+// --- Filters: wire up UI -> render ---
+const filterElements = [...filterTypes, ...ageRadios];
+filterElements.forEach(el => el.addEventListener('change', render));
+if (locSelect) locSelect.addEventListener('change', render);
+if (startDateInput) startDateInput.addEventListener('change', render);
+if (endDateInput) endDateInput.addEventListener('change', render);
 
 // --- Sidebar Toggle ---
 const toggleSidebar = document.getElementById('toggleSidebar');
 const sidebar = document.querySelector('.sidebar');
-toggleSidebar.addEventListener('click', () => {
-  sidebar.classList.toggle('hidden');
-});
+if (toggleSidebar && sidebar) {
+  toggleSidebar.addEventListener('click', () => {
+    sidebar.classList.toggle('hidden');
+  });
+}
+
+// --- Dark Mode Toggle ---
+if (darkModeToggle) {
+  darkModeToggle.addEventListener('change', () => {
+    document.body.classList.toggle('dark', darkModeToggle.checked);
+    localStorage.setItem('darkMode', darkModeToggle.checked);
+  });
+  if (localStorage.getItem('darkMode') === 'true') {
+    darkModeToggle.checked = true;
+    document.body.classList.add('dark');
+  }
+}
 
 // --- Init ---
 seed();
@@ -162,5 +189,5 @@ render();
 // --- Opening Animation ---
 window.addEventListener('load', () => {
   const splash = document.getElementById('openingAnimation');
-  setTimeout(() => splash.remove(), 4000); // Remove after animation
+  setTimeout(() => splash?.remove(), 4000); // Remove after animation
 });
